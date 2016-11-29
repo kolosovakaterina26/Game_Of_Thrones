@@ -36,5 +36,31 @@ namespace Game
             speeds[1] = 4;
             keysPressed = new bool[8];
         }
+        public void DrawCharacter(Graphics g)
+        {
+            g.FillRectangle(Brushes.Gray, X - sizeOfCharacter.Width / 2, Y - sizeOfCharacter.Height / 2, sizeOfCharacter.Width, sizeOfCharacter.Height);
+            g.DrawRectangle(Pens.Black, X - sizeOfCharacter.Width / 2, Y - sizeOfCharacter.Height / 2, sizeOfCharacter.Width, sizeOfCharacter.Height);
+        }
+        public void Calculate()
+        {
+            int speed = 0;
+            for(int i=0;i<keysPressed.Length;i++)
+            {
+                if (keysPressed[i])
+                {
+                    if (i <= 3)
+                        speed = speeds[0];
+                    else
+                        speed = speeds[1];
+                    switch(i%4)
+                    {
+                        case 0: X -= speed; break;
+                        case 1: X += speed; break;
+                        case 2: Y -= speed; break;
+                        case 3: Y += speed; break;
+                    }
+                }
+            }
+        }
     }
 }
